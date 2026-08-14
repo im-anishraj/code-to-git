@@ -1,6 +1,6 @@
 {
   "name": "leet-to-git",
-  "version": "2.0.9",
+  "version": "0.0.1",
   "private": true,
   "description": "Automatically sync your LeetCode solutions to GitHub with ease.",
   "type": "module",
