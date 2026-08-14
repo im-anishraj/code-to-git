@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/octocode.png" alt="Leet to Git - Automatically sync your code to GitHub." width="400">
+  <img src="assets/readme_profile.png" alt="Leet to Git - Automatically sync your code to GitHub." width="400">
   <br>
   Leet to Git - Automatically sync your code to GitHub.
   <br>
