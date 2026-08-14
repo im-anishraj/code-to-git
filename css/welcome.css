@@ -369,6 +369,41 @@ input[type="text"]:focus {
   color: var(--text);
 }
 
+.instruction-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  color: var(--easy);
+}
+
+.instruction-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.instruction-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instruction-text strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.instruction-text span {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
 .cta-links {
   text-align: center;
   font-size: 14px;
