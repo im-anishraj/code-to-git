@@ -1,141 +1,104 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/welcome.css" />
-    <script
-      src="scripts/jquery-3.3.1.min.js"
-    ></script>
-
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      rel="stylesheet"
-    />
-    <script src="scripts/semantic-2.4.1.min.js"></script>
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <div class="ui grid container">
-      <div class="sixteen wide center aligned column">
-        <br />
-        <p class="caption" style="font-size: 9em">
-          Leet to Git
-        </p>
-        <p class="caption">
-          Automatically sync your code from LeetCode to GitHub
-        </p>
-        <br /><br /><br /><br /><br /><br /><br /><br />
-        <p hidden id="error"></p>
-        <p hidden id="success"></p>
-        <p hidden id="unlink">
-          Linked the wrong repo? <a>Unlink</a>.
-        </p>
+    <div class="noise"></div>
+
+    <div class="page">
+      <!-- Hero -->
+      <header class="hero">
+        <div class="hero-icon">
+          <img src="assets/icon.png" alt="Leet to Git Logo" width="48" height="48" style="border-radius: 12px;" />
+        </div>
+        <h1 class="hero-title">Leet to Git</h1>
+        <p class="hero-sub">Automatically sync your LeetCode solutions to GitHub</p>
+      </header>
+
+      <!-- Messages -->
+      <div class="messages">
+        <p hidden id="error" class="msg msg-error"></p>
+        <p hidden id="success" class="msg msg-success"></p>
+        <p hidden id="unlink" class="msg msg-unlink">Linked the wrong repo? <a>Unlink</a></p>
       </div>
 
-      <!-- Create Hook -->
-      <div
-        style="display: none"
-        id="hook_mode"
-        class="ui grid container"
-      >
-        <div class="six wide column">
-          <p class="caption ui large header center aligned">
-            To get started with Leet to Git
-          </p>
-        </div>
-        <div class="four wide left aligned column">
-          <div class="ui form">
-            <div class="field">
-              <select id="type">
-                <option value="">Pick an Option</option>
-                <option value="new">
-                  Create a new Private Repository
-                </option>
-                <option value="link">
-                  Link an Existing Repository
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="six wide column">
-          <div class="ui form">
-            <div class="field">
-              <input
-                autocomplete="off"
-                id="name"
-                placeholder="Repository Name"
-                type="text"
-              />
-            </div>
+      <!-- Hook Mode — Setup -->
+      <section style="display: none" id="hook_mode" class="setup-card">
+        <h2 class="card-title">Get Started</h2>
+        <p class="card-desc">Choose how you want to connect your GitHub repository.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="type">Repository Option</label>
+          <div class="select-wrapper">
+            <select id="type">
+              <option value="">Pick an Option</option>
+              <option value="new">Create a new Private Repository</option>
+              <option value="link">Link an Existing Repository</option>
+            </select>
+            <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </div>
         </div>
 
-        <div class="sixteen wide right aligned column">
-          <br />
-          <button
-            id="hook_button"
-            disabled
-            class="positive ui button"
-          >
-            Get Started
-          </button>
+        <div class="form-group">
+          <label class="form-label" for="name">Repository Name</label>
+          <input autocomplete="off" id="name" placeholder="e.g. leetcode-solutions" type="text" />
         </div>
-      </div>
 
-      <!-- Show stats -->
-      <div
-        style="display: none"
-        id="commit_mode"
-        class="ui grid container"
-      >
-        <div class="eight wide center aligned column">
-          <br /><br />
-          <div
-            style="font-size: 2.3em"
-            class="ui inverted large header"
-          >
-            Problems Solved: <span id="p_solved">0</span>
-          </div>
-          <div
-            styl="font-size: 2.3em"
-            class="ui inverted large header"
-          >
-            <span style="color: #5cb85c">Easy:</span>
-            <span id="p_solved_easy" style="color: #5cb85c">0 </span>
-            <span style="color: #f0ad4e">&ensp; &ensp; Medium:</span>
-            <span id="p_solved_medium" style="color: #f0ad4e"
-              >0
-            </span>
-            <span style="color: #d9534f">&ensp; &ensp; Hard:</span>
-            <span id="p_solved_hard" style="color: #d9534f">0 </span>
-          </div>
-        </div>
-        <div class="eight wide center aligned column">
-          <br /><br /><br />
-          <div class="ui inverted large header">
-            Want more features? <br /><a
-              style="color: aqua !important; font-size: 0.8em"
-              target="_blank"
-              href="https://github.com/im-anishraj/leet-to-git/labels/feature"
-              >Request a feature!</a
-            >
-          </div>
-        </div>
-      </div>
+        <button id="hook_button" disabled class="btn btn-primary">
+          <span>Get Started</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </section>
 
-      <!-- Rate on GitHub -->
-      <div class="sixteen wide right aligned column">
-        <br /><br /><br /><br /><br />
-        <div class="ui inverted small header">
-          <a
-            style="color: rgb(143, 202, 202) !important"
-            target="_blank"
-            href="https://github.com/im-anishraj/leet-to-git"
-            >Star <span style="color: white">Leet to Git</span> on
-            GitHub</a
-          >
+      <!-- Commit Mode — Dashboard -->
+      <section style="display: none" id="commit_mode" class="dashboard-card">
+        <h2 class="card-title">Your Progress</h2>
+
+        <div class="stat-ring-container">
+          <div class="stat-ring">
+            <span id="p_solved" class="ring-number">0</span>
+            <span class="ring-label">solved</span>
+          </div>
         </div>
-      </div>
+
+        <div class="diff-row">
+          <div class="diff-item easy">
+            <span class="diff-dot"></span>
+            <span class="diff-name">Easy</span>
+            <span id="p_solved_easy" class="diff-count">0</span>
+          </div>
+          <div class="diff-item medium">
+            <span class="diff-dot"></span>
+            <span class="diff-name">Medium</span>
+            <span id="p_solved_medium" class="diff-count">0</span>
+          </div>
+          <div class="diff-item hard">
+            <span class="diff-dot"></span>
+            <span class="diff-name">Hard</span>
+            <span id="p_solved_hard" class="diff-count">0</span>
+          </div>
+        </div>
+
+        <div class="cta-links">
+          <span>Want more features?</span>
+          <a target="_blank" href="https://github.com/im-anishraj/leet-to-git/issues/new?labels=enhancement">Request a feature</a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <a href="https://github.com/im-anishraj/leet-to-git" target="_blank" class="star-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Star <strong>Leet to Git</strong> on GitHub
+        </a>
+      </footer>
     </div>
 
     <script type="text/javascript" src="scripts/welcome.js"></script>

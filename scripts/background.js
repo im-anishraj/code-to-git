@@ -5,7 +5,7 @@ let api = isChrome() ? chrome : isFirefox() ? browser : undefined;
 api.runtime.onInstalled.addListener(details => {
   if (details.reason === 'install') {
     // Allow persistent stats to sync on repo link
-    api.storage.local.set({ sync_stats: true});
+    api.storage.local.set({ sync_stats: true });
   }
 });
 

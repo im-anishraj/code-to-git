@@ -108,7 +108,7 @@ const createRepo = async (token, name) => {
   $('#unlink').show();
   /* Show new layout */
   document.getElementById('hook_mode').style.display = 'none';
-  document.getElementById('commit_mode').style.display = 'inherit';
+  document.getElementById('commit_mode').style.display = 'block';
 };
 
 const getLinkErrorString = (statusCode, name) => {
@@ -153,7 +153,7 @@ const linkRepo = (token, name) => {
       });
 
       /* Hide accordingly */
-      document.getElementById('hook_mode').style.display = 'inherit';
+      document.getElementById('hook_mode').style.display = 'block';
       document.getElementById('commit_mode').style.display = 'none';
       return;
     }
@@ -186,7 +186,7 @@ const linkRepo = (token, name) => {
 
     /* Hide accordingly */
     document.getElementById('hook_mode').style.display = 'none';
-    document.getElementById('commit_mode').style.display = 'inherit';
+    document.getElementById('commit_mode').style.display = 'block';
   });
 
   xhr.open('GET', AUTHENTICATION_URL, true);
@@ -206,7 +206,7 @@ const unlinkRepo = () => {
   );
 
   /* Hide accordingly */
-  document.getElementById('hook_mode').style.display = 'inherit';
+  document.getElementById('hook_mode').style.display = 'block';
   document.getElementById('commit_mode').style.display = 'none';
 };
 
@@ -296,7 +296,7 @@ api.storage.local.get('mode_type', data => {
         $('#error').show();
         $('#success').hide();
         /* Hide accordingly */
-        document.getElementById('hook_mode').style.display = 'inherit';
+        document.getElementById('hook_mode').style.display = 'block';
         document.getElementById('commit_mode').style.display = 'none';
       } else {
         /* Get access to repo */
@@ -310,7 +310,7 @@ api.storage.local.get('mode_type', data => {
             $('#error').show();
             $('#success').hide();
             /* Hide accordingly */
-            document.getElementById('hook_mode').style.display = 'inherit';
+            document.getElementById('hook_mode').style.display = 'block';
             document.getElementById('commit_mode').style.display = 'none';
           } else {
             /* Username exists, at least in storage. Confirm this */
@@ -321,9 +321,9 @@ api.storage.local.get('mode_type', data => {
     });
 
     document.getElementById('hook_mode').style.display = 'none';
-    document.getElementById('commit_mode').style.display = 'inherit';
+    document.getElementById('commit_mode').style.display = 'block';
   } else {
-    document.getElementById('hook_mode').style.display = 'inherit';
+    document.getElementById('hook_mode').style.display = 'block';
     document.getElementById('commit_mode').style.display = 'none';
   }
 });

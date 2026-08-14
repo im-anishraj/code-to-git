@@ -1,8 +1,8 @@
-import { getBrowser } from "./leetcode/util.js";
+import { getBrowser } from './leetcode/util.js';
 
 let action = false;
 
-let api = getBrowser()
+let api = getBrowser();
 
 $('#authenticate').on('click', () => {
   if (action) {
@@ -14,18 +14,22 @@ $('#authenticate').on('click', () => {
 $('#welcome_URL').attr('href', api.runtime.getURL('welcome.html'));
 $('#hook_URL').attr('href', api.runtime.getURL('welcome.html'));
 $('#reset_stats').on('click', () => {
-  $('#reset_confirmation').show();
-  $('#reset_yes').off('click').on('click', () => {
-    api.storage.local.set({ stats: null });
-    $('#p_solved').text(0);
-    $('#p_solved_easy').text(0);
-    $('#p_solved_medium').text(0);
-    $('#p_solved_hard').text(0);
-    $('#reset_confirmation').hide()
-  })
-  $('#reset_no').off('click').on('click', () => {
-    $('#reset_confirmation').hide()
-  })
+  $('#reset_confirmation').css('display', 'flex');
+  $('#reset_yes')
+    .off('click')
+    .on('click', () => {
+      api.storage.local.set({ stats: null });
+      $('#p_solved').text(0);
+      $('#p_solved_easy').text(0);
+      $('#p_solved_medium').text(0);
+      $('#p_solved_hard').text(0);
+      $('#reset_confirmation').hide();
+    });
+  $('#reset_no')
+    .off('click')
+    .on('click', () => {
+      $('#reset_confirmation').hide();
+    });
 });
 
 api.storage.local.get('leethub_token', data => {
@@ -55,7 +59,7 @@ api.storage.local.get('leethub_token', data => {
                 const leethubHook = data3?.leethub_hook;
                 if (leethubHook) {
                   $('#repo_url').html(
-                    `<a target="blank" style="color: cadetblue !important; font-size:0.8em;" href="https://github.com/${leethubHook}">${leethubHook}</a>`
+                    `<a target="_blank" href="https://github.com/${leethubHook}">${leethubHook}</a>`
                   );
                 }
               });
