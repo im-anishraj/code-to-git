@@ -13,8 +13,6 @@
 
 <br />
 
-<img src="assets/extension/leetcode.png" alt="Code to Git in action" width="700" />
-
 </div>
 
 ---
