@@ -72,9 +72,7 @@ Getting up and running takes **under 60 seconds**:
 4️⃣  Start solving on LeetCode — solutions sync automatically!
 ```
 
-<div align="center">
-<img src="assets/extension/output.gif" alt="Demo" width="600" />
-</div>
+
 
 ---
 
