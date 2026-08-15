@@ -11,13 +11,13 @@ const repositoryName = () => {
 };
 
 const createRepoDescription =
-  'A collection of LeetCode questions to ace the coding interview! - Created using [Leet to Git](https://github.com/im-anishraj/leet-to-git)';
+  'A collection of LeetCode questions to ace the coding interview! - Created using [Code to Git](https://github.com/im-anishraj/code-to-git)';
 
 /* Sync's local storage with persistent stats and returns the pulled stats. Currently only syncs when we install, or unlink then relink */
 const syncStats = async () => {
-  let { leethub_hook, leethub_token, sync_stats, stats } = await api.storage.local.get([
-    'leethub_token',
-    'leethub_hook',
+  let { codetogit_hook, codetogit_token, sync_stats, stats } = await api.storage.local.get([
+    'codetogit_token',
+    'codetogit_hook',
     'sync_stats',
     'stats',
   ]);
@@ -27,12 +27,12 @@ const syncStats = async () => {
     return;
   }
 
-  const URL = `https://api.github.com/repos/${leethub_hook}/contents/stats.json`;
+  const URL = `https://api.github.com/repos/${codetogit_hook}/contents/stats.json`;
 
   let options = {
     method: 'GET',
     headers: {
-      Authorization: `token ${leethub_token}`,
+      Authorization: `token ${codetogit_token}`,
       Accept: 'application/vnd.github.v3+json',
     },
   };
@@ -98,7 +98,7 @@ const createRepo = async (token, name) => {
   res = await res.json();
 
   /* Set Repo Hook, and set mode type to commit */
-  api.storage.local.set({ mode_type: 'commit', leethub_hook: res.full_name });
+  api.storage.local.set({ mode_type: 'commit', codetogit_hook: res.full_name });
   await api.storage.local.remove('stats');
   $('#error').hide();
   $('#success').html(
@@ -114,9 +114,9 @@ const createRepo = async (token, name) => {
 const getLinkErrorString = (statusCode, name) => {
   /* Status codes for linking repo */
   const errorStrings = {
-    301: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Leet to Git. <br> This repository has been moved permenantly. Try creating a new one.`,
-    403: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Leet to Git. <br> Forbidden action. Please make sure you have the right access to this repository.`,
-    404: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Leet to Git. <br> Resource not found. Make sure you enter the right repository name.`,
+    301: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Code to Git. <br> This repository has been moved permenantly. Try creating a new one.`,
+    403: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Code to Git. <br> Forbidden action. Please make sure you have the right access to this repository.`,
+    404: `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to Code to Git. <br> Resource not found. Make sure you enter the right repository name.`,
   };
   return errorStrings[statusCode];
 };
@@ -147,8 +147,8 @@ const linkRepo = (token, name) => {
       // unable to gain access to repo in commit mode. Must switch to hook mode.
       /* Set mode type to hook and Repo Hook to NONE */
       handleLinkRepoError(xhr.status, name);
-      api.storage.local.set({ mode_type: 'hook', leethub_hook: null }, () => {
-        console.log(`Error linking ${name} to Leet to Git`);
+      api.storage.local.set({ mode_type: 'hook', codetogit_hook: null }, () => {
+        console.log(`Error linking ${name} to Code to Git`);
         console.log('Defaulted repo hook to NONE');
       });
 
@@ -160,11 +160,11 @@ const linkRepo = (token, name) => {
 
     const res = JSON.parse(xhr.responseText);
     api.storage.local.set(
-      { mode_type: 'commit', repo: res.html_url, leethub_hook: res.full_name },
+      { mode_type: 'commit', repo: res.html_url, codetogit_hook: res.full_name },
       () => {
         $('#error').hide();
         $('#success').html(
-          `Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to Leet to Git. Start <a href="http://leetcode.com">LeetCoding</a> now!`
+          `Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to Code to Git. Start <a href="http://leetcode.com">LeetCoding</a> now!`
         );
         $('#success').show();
         $('#unlink').show();
@@ -198,7 +198,7 @@ const linkRepo = (token, name) => {
 const unlinkRepo = () => {
   /* Reset mode type to hook, stats to null */
   api.storage.local.set(
-    { mode_type: 'hook', leethub_hook: null, sync_stats: true, stats: null },
+    { mode_type: 'hook', codetogit_hook: null, sync_stats: true, stats: null },
     () => {
       console.log(`Unlinked repo`);
       console.log('Cleared local stats');
@@ -244,24 +244,24 @@ $('#hook_button').on('click', () => {
       - step 3: if (1), POST request to repoName (iff option = create new repo) ; else display error message.
       - step 4: if proceed from 3, hide hook_mode and display commit_mode (show stats e.g: files pushed/questions-solved/leaderboard)
     */
-    api.storage.local.get('leethub_token', data => {
-      const token = data.leethub_token;
+    api.storage.local.get('codetogit_token', data => {
+      const token = data.codetogit_token;
       if (token === null || token === undefined) {
         /* Not authorized yet. */
         $('#error').text(
-          'Authorization error - Grant Leet to Git access to your GitHub account to continue (launch extension to proceed)'
+          'Authorization error - Grant Code to Git access to your GitHub account to continue (launch extension to proceed)'
         );
         $('#error').show();
         $('#success').hide();
       } else if (option() === 'new') {
         createRepo(token, repositoryName());
       } else {
-        api.storage.local.get('leethub_username', data2 => {
-          const username = data2.leethub_username;
+        api.storage.local.get('codetogit_username', data2 => {
+          const username = data2.codetogit_username;
           if (!username) {
             /* Improper authorization. */
             $('#error').text(
-              'Improper Authorization error - Grant Leet to Git access to your GitHub account to continue (launch extension to proceed)'
+              'Improper Authorization error - Grant Code to Git access to your GitHub account to continue (launch extension to proceed)'
             );
             $('#error').show();
             $('#success').hide();
@@ -286,12 +286,12 @@ api.storage.local.get('mode_type', data => {
 
   if (mode && mode === 'commit') {
     /* Check if still access to repo */
-    api.storage.local.get('leethub_token', data2 => {
-      const token = data2.leethub_token;
+    api.storage.local.get('codetogit_token', data2 => {
+      const token = data2.codetogit_token;
       if (token === null || token === undefined) {
         /* Not authorized yet. */
         $('#error').text(
-          'Authorization error - Grant Leet to Git access to your GitHub account to continue (click Leet to Git extension on the top right to proceed)'
+          'Authorization error - Grant Code to Git access to your GitHub account to continue (click Code to Git extension on the top right to proceed)'
         );
         $('#error').show();
         $('#success').hide();
@@ -300,12 +300,12 @@ api.storage.local.get('mode_type', data => {
         document.getElementById('commit_mode').style.display = 'none';
       } else {
         /* Get access to repo */
-        api.storage.local.get('leethub_hook', repoName => {
-          const hook = repoName.leethub_hook;
+        api.storage.local.get('codetogit_hook', repoName => {
+          const hook = repoName.codetogit_hook;
           if (!hook) {
             /* Not authorized yet. */
             $('#error').text(
-              'Improper Authorization error - Grant Leet to Git access to your GitHub account to continue (click Leet to Git extension on the top right to proceed)'
+              'Improper Authorization error - Grant Code to Git access to your GitHub account to continue (click Code to Git extension on the top right to proceed)'
             );
             $('#error').show();
             $('#success').hide();

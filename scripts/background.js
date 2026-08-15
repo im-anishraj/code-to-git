@@ -14,13 +14,13 @@ api.runtime.onMessage.addListener(handleMessage);
 function handleMessage(request, sender, sendResponse) {
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
-    api.storage.local.set({ leethub_username: request.username });
+    api.storage.local.set({ codetogit_username: request.username });
 
     /* Set token */
-    api.storage.local.set({ leethub_token: request.token });
+    api.storage.local.set({ codetogit_token: request.token });
 
     /* Close pipe */
-    api.storage.local.set({ pipe_leethub: false }, () => {
+    api.storage.local.set({ pipe_codetogit: false }, () => {
       console.log('Closed pipe.');
     });
 

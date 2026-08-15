@@ -1,6 +1,6 @@
-# Contributing to Leet to Git
+# Contributing to Code to Git
 
-First off, thank you for considering contributing to Leet to Git! It's people like you that make this tool awesome for the developer community.
+First off, thank you for considering contributing to Code to Git! It's people like you that make this tool awesome for the developer community.
 
 ## How can I contribute?
 

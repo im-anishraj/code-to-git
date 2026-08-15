@@ -1,27 +1,27 @@
 <div align="center">
 
-<img src="assets/icon.png" alt="Leet to Git Logo" width="120" height="120" style="border-radius: 24px;" />
+<img src="assets/icon.png" alt="Code to Git Logo" width="120" height="120" style="border-radius: 24px;" />
 
-# Leet to Git
+# Code to Git
 
 ### Automatically sync your LeetCode solutions to GitHub — zero effort.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://github.com/im-anishraj/leet-to-git/blob/main/LICENSE)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore/detail/leet-to-git/geodebjjkeochpcpjdkclmjbpkjblhnd)
-[![GitHub Stars](https://img.shields.io/github/stars/im-anishraj/leet-to-git?style=for-the-badge&logo=github&color=yellow)](https://github.com/im-anishraj/leet-to-git/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](https://github.com/im-anishraj/leet-to-git/pulls)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://github.com/im-anishraj/code-to-git/blob/main/LICENSE)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore/detail/code-to-git/geodebjjkeochpcpjdkclmjbpkjblhnd)
+[![GitHub Stars](https://img.shields.io/github/stars/im-anishraj/code-to-git?style=for-the-badge&logo=github&color=yellow)](https://github.com/im-anishraj/code-to-git/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](https://github.com/im-anishraj/code-to-git/pulls)
 
 <br />
 
-<img src="assets/extension/leetcode.png" alt="Leet to Git in action" width="700" />
+<img src="assets/extension/leetcode.png" alt="Code to Git in action" width="700" />
 
 </div>
 
 ---
 
-## ⚡ What is Leet to Git?
+## ⚡ What is Code to Git?
 
-**Leet to Git** is a browser extension that **automatically pushes your accepted LeetCode solutions** to a GitHub repository the moment you pass all tests. No copy-pasting, no manual commits — just solve and go.
+**Code to Git** is a browser extension that **automatically pushes your accepted LeetCode solutions** to a GitHub repository the moment you pass all tests. No copy-pasting, no manual commits — just solve and go.
 
 > 💡 Build your GitHub portfolio while you grind LeetCode. Recruiters love green squares.
 
@@ -40,7 +40,7 @@
 
 ---
 
-## 🎯 Why Leet to Git?
+## 🎯 Why Code to Git?
 
 <table>
 <tr>
@@ -53,7 +53,7 @@ Recruiters **want** to see your GitHub activity. Every LeetCode solve becomes a 
 <td width="50%">
 
 ### ⏱️ Save Time
-Manually pushing code from LeetCode is painful and time-consuming. Leet to Git eliminates that friction entirely. **Solve → Accept → Done.** Your code is already on GitHub.
+Manually pushing code from LeetCode is painful and time-consuming. Code to Git eliminates that friction entirely. **Solve → Accept → Done.** Your code is already on GitHub.
 
 </td>
 </tr>
@@ -97,8 +97,8 @@ Want to contribute or tinker? Here's how to get set up:
 
 ```bash
 # 1. Fork & clone
-git clone https://github.com/<your-username>/leet-to-git.git
-cd leet-to-git
+git clone https://github.com/<your-username>/code-to-git.git
+cd code-to-git
 
 # 2. Install dependencies
 npm install
@@ -151,7 +151,7 @@ Check out [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - [ ] GeeksforGeeks integration
 - [ ] Firefox Add-on store listing
 
-Have an idea? [Request a feature →](https://github.com/im-anishraj/leet-to-git/issues/new?labels=enhancement)
+Have an idea? [Request a feature →](https://github.com/im-anishraj/code-to-git/issues/new?labels=enhancement)
 
 ---
 
@@ -163,7 +163,7 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 
 ## 🔒 Privacy
 
-Your privacy matters. Leet to Git does **not** collect, store, or transmit any personal data to external servers. All data stays in your browser. Read the full [Privacy Policy](PRIVACY.md).
+Your privacy matters. Code to Git does **not** collect, store, or transmit any personal data to external servers. All data stays in your browser. Read the full [Privacy Policy](PRIVACY.md).
 
 ---
 

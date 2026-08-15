@@ -4,7 +4,7 @@ const oAuth2 = {
    * Initialize
    */
   init() {
-    this.KEY = 'leethub_token';
+    this.KEY = 'codetogit_token';
     this.ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
     this.AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
     this.CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
@@ -25,7 +25,7 @@ const oAuth2 = {
       url += this.SCOPES[i];
     }
 
-    chrome.storage.local.set({ pipe_leethub: true }, () => {
+    chrome.storage.local.set({ pipe_codetogit: true }, () => {
       // opening pipe temporarily, redirects to github
       chrome.tabs.create({ url, active: true }, function () {});
     });

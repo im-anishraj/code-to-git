@@ -7,19 +7,19 @@ import {
   getBrowser,
   getDifficulty,
   isEmptyObject,
-  LeetHubError,
+  CodeToGitError,
   mergeStats,
 } from './util.js';
 import { appendProblemToReadme, sortTopicsInReadme } from './readmeTopics.js';
 
 /* Commit messages */
-const readmeMsg = 'Create README - LeetHub';
+const readmeMsg = 'Create README - Code to Git';
 const updateReadmeMsg = 'Update README - Topic Tags';
 const updateStatsMsg = 'Updated stats';
-const discussionMsg = 'Prepend discussion post - Leet to Git';
-const createNotesMsg = 'Attach NOTES - Leet to Git';
+const discussionMsg = 'Prepend discussion post - Code to Git';
+const createNotesMsg = 'Attach NOTES - Code to Git';
 const defaultRepoReadme =
-  'A collection of LeetCode questions to ace the coding interview! - Created using [Leet to Git](https://github.com/im-anishraj/leet-to-git)';
+  'A collection of LeetCode questions to ace the coding interview! - Created using [Code to Git](https://github.com/im-anishraj/code-to-git)';
 const readmeFilename = 'README.md';
 const statsFilename = 'stats.json';
 
@@ -68,7 +68,7 @@ const encode = data => btoa(unescape(encodeURIComponent(data)));
  *
  * @returns {Promise<string>} - A promise that resolves with the new SHA of the content after successful upload.
  *
- * @throws {LeetHubError} - Throws an error if the response is not OK (e.g., HTTP status code is not `200-299`).
+ * @throws {CodeToGitError} - Throws an error if the response is not OK (e.g., HTTP status code is not `200-299`).
  */
 const upload = async (token, hook, content, problem, filename, sha, message) => {
   const path = getPath(problem, filename);
@@ -91,7 +91,7 @@ const upload = async (token, hook, content, problem, filename, sha, message) => 
 
   const res = await fetch(URL, options);
   if (!res.ok) {
-    throw new LeetHubError(res.status, { cause: res });
+    throw new CodeToGitError(res.status, { cause: res });
   }
   console.log(`Successfully committed ${getPath(problem, filename)} to github`);
 
@@ -156,9 +156,9 @@ const setPersistentStats = async localStats => {
   const pStatsEncoded = encode(JSON.stringify(pStats));
   const sha = localStats?.shas?.[readmeFilename]?.[''] || '';
 
-  const { leethub_token: token, leethub_hook: hook } = await api.storage.local.get([
-    'leethub_token',
-    'leethub_hook',
+  const { codetogit_token: token, codetogit_hook: hook } = await api.storage.local.get([
+    'codetogit_token',
+    'codetogit_hook',
   ]);
 
   try {
@@ -207,12 +207,12 @@ const updateReadmeWithDiscussionPost = async (
   shouldPreprendDiscussionPosts
 ) => {
   let responseSHA;
-  const { leethub_token, leethub_hook } = await api.storage.local.get([
-    'leethub_token',
-    'leethub_hook',
+  const { codetogit_token, codetogit_hook } = await api.storage.local.get([
+    'codetogit_token',
+    'codetogit_hook',
   ]);
 
-  return getGitHubFile(leethub_token, leethub_hook, directory, filename)
+  return getGitHubFile(codetogit_token, codetogit_hook, directory, filename)
     .then(resp => resp.json())
     .then(data => {
       responseSHA = data.sha;
@@ -222,7 +222,7 @@ const updateReadmeWithDiscussionPost = async (
       shouldPreprendDiscussionPosts ? encode(addition + existingContent) : encode(existingContent)
     )
     .then(newContent =>
-      upload(leethub_token, leethub_hook, newContent, directory, filename, responseSHA, commitMsg)
+      upload(codetogit_token, codetogit_hook, newContent, directory, filename, responseSHA, commitMsg)
     );
 };
 
@@ -240,31 +240,31 @@ const updateReadmeWithDiscussionPost = async (
  *
  * @returns {Promise<string>} A promise that resolves with the new SHA of the content after successful upload.
  *
- * @throws {LeetHubError} If there's no token defined, the mode type is not `commit`, or if no repository hook is defined.
+ * @throws {CodeToGitError} If there's no token defined, the mode type is not `commit`, or if no repository hook is defined.
  */
 async function uploadGitWith409Retry(code, problemName, filename, commitMsg, optionals) {
   let token;
   let hook;
 
   const storageData = await api.storage.local.get([
-    'leethub_token',
+    'codetogit_token',
     'mode_type',
-    'leethub_hook',
+    'codetogit_hook',
     'stats',
   ]);
 
-  token = storageData.leethub_token;
+  token = storageData.codetogit_token;
   if (!token) {
-    throw new LeetHubError('LeethubTokenUndefined');
+    throw new CodeToGitError('LeethubTokenUndefined');
   }
 
   if (storageData.mode_type !== 'commit') {
-    throw new LeetHubError('LeetHubNotAuthorizedByGit');
+    throw new CodeToGitError('CodeToGitNotAuthorizedByGit');
   }
 
-  hook = storageData.leethub_hook;
+  hook = storageData.codetogit_hook;
   if (!hook) {
-    throw new LeetHubError('NoRepoDefined');
+    throw new CodeToGitError('NoRepoDefined');
   }
 
   /* Get SHA, if it exists */
@@ -371,13 +371,13 @@ function createRepoReadme() {
 
 async function updateReadmeTopicTagsWithProblem(topicTags, problemName) {
   if (topicTags == null) {
-    console.log(new LeetHubError('TopicTagsNotFound'));
+    console.log(new CodeToGitError('TopicTagsNotFound'));
     return;
   }
 
-  const { leethub_token, leethub_hook, stats } = await api.storage.local.get([
-    'leethub_token',
-    'leethub_hook',
+  const { codetogit_token, codetogit_hook, stats } = await api.storage.local.get([
+    'codetogit_token',
+    'codetogit_hook',
     'stats',
   ]);
 
@@ -386,8 +386,8 @@ async function updateReadmeTopicTagsWithProblem(topicTags, problemName) {
 
   try {
     const { content, sha } = await getGitHubFile(
-      leethub_token,
-      leethub_hook,
+      codetogit_token,
+      codetogit_hook,
       readmeFilename
     ).then(resp => resp.json());
     readme = content;
@@ -401,7 +401,7 @@ async function updateReadmeTopicTagsWithProblem(topicTags, problemName) {
   }
   readme = decode(readme);
   for (let topic of topicTags) {
-    readme = appendProblemToReadme(topic.name, readme, leethub_hook, problemName);
+    readme = appendProblemToReadme(topic.name, readme, codetogit_hook, problemName);
   }
   readme = sortTopicsInReadme(readme);
   readme = encode(readme);
@@ -422,7 +422,7 @@ function loader(leetCode) {
         iterations++;
         if (iterations > 9) {
           // poll for max 10 attempts (10 seconds)
-          throw new LeetHubError('Could not find successful submission after 10 seconds.');
+          throw new CodeToGitError('Could not find successful submission after 10 seconds.');
         }
         return;
       }
@@ -436,19 +436,19 @@ function loader(leetCode) {
 
       const probStats = leetCode.parseStats();
       if (!probStats) {
-        throw new LeetHubError('SubmissionStatsNotFound');
+        throw new CodeToGitError('SubmissionStatsNotFound');
       }
 
       const probStatement = leetCode.parseQuestion();
       if (!probStatement) {
-        throw new LeetHubError('ProblemStatementNotFound');
+        throw new CodeToGitError('ProblemStatementNotFound');
       }
 
       const problemName = leetCode.getProblemNameSlug();
       const alreadyCompleted = await isCompleted(problemName);
       const language = leetCode.getLanguageExtension();
       if (!language) {
-        throw new LeetHubError('LanguageNotFound');
+        throw new CodeToGitError('LanguageNotFound');
       }
       const filename = problemName + language;
 
@@ -495,7 +495,7 @@ function loader(leetCode) {
       leetCode.markUploadFailed();
       clearInterval(intervalId);
 
-      if (!(err instanceof LeetHubError)) {
+      if (!(err instanceof CodeToGitError)) {
         console.error(err);
         return;
       }
@@ -525,7 +525,7 @@ async function listenForSubmissionId() {
     type: 'LEETCODE_SUBMISSION',
   });
   if (submissionId == null) {
-    console.log(new LeetHubError('SubmissionIdNotFound'));
+    console.log(new CodeToGitError('SubmissionIdNotFound'));
     return;
   }
   return submissionId;
@@ -542,10 +542,10 @@ async function v2SubmissionHandler(event, leetCode) {
   }
 
   const authenticated =
-    !isEmptyObject(await api.storage.local.get(['leethub_token'])) &&
-    !isEmptyObject(await api.storage.local.get(['leethub_hook']));
+    !isEmptyObject(await api.storage.local.get(['codetogit_token'])) &&
+    !isEmptyObject(await api.storage.local.get(['codetogit_hook']));
   if (!authenticated) {
-    throw new LeetHubError('UserNotAuthenticated');
+    throw new CodeToGitError('UserNotAuthenticated');
   }
 
   // is click or is ctrl enter
@@ -594,11 +594,11 @@ submitBtnObserver.observe(document.body, {
 /* Sync to local storage */
 api.storage.local.get('isSync', data => {
   const keys = [
-    'leethub_token',
-    'leethub_username',
-    'pipe_leethub',
+    'codetogit_token',
+    'codetogit_username',
+    'pipe_codetogit',
     'stats',
-    'leethub_hook',
+    'codetogit_hook',
     'mode_type',
   ];
   if (!data || !data.isSync) {
@@ -608,10 +608,10 @@ api.storage.local.get('isSync', data => {
       });
     });
     api.storage.local.set({ isSync: true }, () => {
-      console.log('Leet to Git Synced to local values');
+      console.log('Code to Git Synced to local values');
     });
   } else {
-    console.log('Leet to Git Local storage already synced!');
+    console.log('Code to Git Local storage already synced!');
   }
 });
 
@@ -630,7 +630,7 @@ setupManualSubmitBtn(
   )
 );
 
-class LeetHubNetworkError extends LeetHubError {
+class CodeToGitNetworkError extends CodeToGitError {
   constructor(response) {
     super(response.statusText);
     this.status = response.status;

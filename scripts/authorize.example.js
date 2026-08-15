@@ -8,7 +8,7 @@ const localAuth = {
    * Initialize
    */
   init() {
-    this.KEY = 'leethub_token';
+    this.KEY = 'codetogit_token';
     this.ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
     this.AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
     this.CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
@@ -98,8 +98,8 @@ const link = window.location.href;
 
 /* Check for open pipe */
 if (window.location.host === 'github.com') {
-  chrome.storage.local.get('pipe_leethub', data => {
-    if (data && data.pipe_leethub) {
+  chrome.storage.local.get('pipe_codetogit', data => {
+    if (data && data.pipe_codetogit) {
       localAuth.parseAccessCode(link);
     }
   });

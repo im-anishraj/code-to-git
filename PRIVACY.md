@@ -1,9 +1,9 @@
-# Privacy Policy for Leet to Git
+# Privacy Policy for Code to Git
 
 Last updated: August 14, 2026
 
 ## 1. Information We Collect
-Leet to Git is a client-side browser extension. We do not operate any backend servers and we do not collect, store, or transmit your personal data to any third-party servers. All data processed by the extension remains locally on your device or is communicated directly with official third-party APIs (GitHub).
+Code to Git is a client-side browser extension. We do not operate any backend servers and we do not collect, store, or transmit your personal data to any third-party servers. All data processed by the extension remains locally on your device or is communicated directly with official third-party APIs (GitHub).
 
 ### Authentication Information
 To function, the extension requires access to your GitHub account via OAuth2. The extension securely stores your GitHub OAuth access token locally in your browser's synchronized storage. This token is used strictly to authenticate API requests to GitHub on your behalf (e.g., creating a repository and pushing code). We do not have access to this token.
@@ -24,7 +24,7 @@ The extension communicates with:
 - **LeetCode**: To read your accepted submissions. (See [LeetCode Privacy Policy](https://leetcode.com/privacy/))
 
 ## 5. User Consent
-By using the Leet to Git extension, you consent to this Privacy Policy.
+By using the Code to Git extension, you consent to this Privacy Policy.
 
 ## 6. Contact
-If you have any questions regarding this privacy policy, you may open an issue on our [GitHub repository](https://github.com/im-anishraj/leet-to-git/issues).
+If you have any questions regarding this privacy policy, you may open an issue on our [GitHub repository](https://github.com/im-anishraj/code-to-git/issues).
