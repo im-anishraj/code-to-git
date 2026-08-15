@@ -4,7 +4,7 @@
 
 # Code to Git
 
-### Automatically sync your LeetCode solutions to GitHub — zero effort.
+### Automatically sync your coding solutions from universal platforms (LeetCode, GeeksforGeeks, etc.) to GitHub — zero effort.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://github.com/im-anishraj/code-to-git/blob/main/LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore/detail/code-to-git/geodebjjkeochpcpjdkclmjbpkjblhnd)
@@ -19,9 +19,9 @@
 
 ## ⚡ What is Code to Git?
 
-**Code to Git** is a browser extension that **automatically pushes your accepted LeetCode solutions** to a GitHub repository the moment you pass all tests. No copy-pasting, no manual commits — just solve and go.
+**Code to Git** is a browser extension that **automatically pushes your accepted solutions from various coding platforms** to a GitHub repository the moment you pass all tests. No copy-pasting, no manual commits — just solve and go.
 
-> 💡 Build your GitHub portfolio while you grind LeetCode. Recruiters love green squares.
+> 💡 Build your GitHub portfolio while you grind on coding platforms. Recruiters love green squares.
 
 ---
 
@@ -29,7 +29,7 @@
 
 | Feature | Description |
 |---------|-------------|
-| 🚀 **Auto-Sync** | Solutions are pushed to GitHub instantly when accepted on LeetCode |
+| 🚀 **Auto-Sync** | Solutions are pushed to GitHub instantly when accepted on supported coding platforms |
 | 📊 **Stats Dashboard** | Track your Easy, Medium, and Hard progress in a sleek popup |
 | 🔒 **Secure OAuth** | Industry-standard OAuth2 authentication with GitHub |
 | 📂 **Organized Repos** | Code is neatly organized into folders by problem name |
@@ -45,13 +45,13 @@
 <td width="50%">
 
 ### 📈 Build Your Portfolio
-Recruiters **want** to see your GitHub activity. Every LeetCode solve becomes a real commit on your profile — automatically. Your GitHub becomes a living resume of your problem-solving skills.
+Recruiters **want** to see your GitHub activity. Every problem you solve becomes a real commit on your profile — automatically. Your GitHub becomes a living resume of your problem-solving skills.
 
 </td>
 <td width="50%">
 
 ### ⏱️ Save Time
-Manually pushing code from LeetCode is painful and time-consuming. Code to Git eliminates that friction entirely. **Solve → Accept → Done.** Your code is already on GitHub.
+Manually pushing code from multiple platforms is painful and time-consuming. Code to Git eliminates that friction entirely. **Solve → Accept → Done.** Your code is already on GitHub.
 
 </td>
 </tr>
@@ -67,7 +67,7 @@ Getting up and running takes **under 60 seconds**:
 1️⃣  Install the extension from Chrome Web Store
 2️⃣  Click the extension icon → "Authorize with GitHub"
 3️⃣  Create a new repo or link an existing one
-4️⃣  Start solving on LeetCode — solutions sync automatically!
+4️⃣  Start solving on your favorite coding platforms — solutions sync automatically!
 ```
 
 <div align="center">
@@ -141,12 +141,13 @@ Check out [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📋 Roadmap
 
-- [x] Auto-sync accepted LeetCode solutions
+- [x] Auto-sync accepted coding solutions
 - [x] Premium dark theme dashboard
 - [x] Stats tracking (Easy / Medium / Hard)
+- [x] GeeksforGeeks integration
+- [ ] Support for other universal coding platforms (HackerRank, etc.)
 - [ ] Support for multiple languages per problem
 - [ ] Streak tracking & badges
-- [ ] GeeksforGeeks integration
 - [ ] Firefox Add-on store listing
 
 Have an idea? [Request a feature →](https://github.com/im-anishraj/code-to-git/issues/new?labels=enhancement)
